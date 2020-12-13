@@ -12,7 +12,7 @@ namespace ProjetoMvp.Tests.Models
         private const string _valid_city = "São Paulo";
 
         [Fact]
-        public void Should_generate_id_after_initialized_correctly()
+        public void Should_generate_id_after_being_initialized_correctly()
         {
             var address = new Address(_valid_country, _valid_state, _valid_city);
             Assert.True(address.Id != Guid.Empty);
