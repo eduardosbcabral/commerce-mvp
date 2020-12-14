@@ -1,22 +1,15 @@
-﻿using ProjetoMvp.Api.Models;
+﻿using ProjetoMvp.CommerceContext.Domain.ValueObjects;
 using System;
 using System.Linq;
 using Xunit;
 
-namespace ProjetoMvp.Tests.Models
+namespace ProjetoMvp.Tests.CommerceContext.ValueObjects
 {
     public class AddressTests
     {
         private const string _valid_country = "Brasil";
         private const string _valid_state = "São Paulo";
         private const string _valid_city = "São Paulo";
-
-        [Fact]
-        public void Should_generate_id_after_being_initialized_correctly()
-        {
-            var address = new Address(_valid_country, _valid_state, _valid_city);
-            Assert.True(address.Id != Guid.Empty);
-        }
 
         [Fact]
         public void Should_validate_input_correctly()

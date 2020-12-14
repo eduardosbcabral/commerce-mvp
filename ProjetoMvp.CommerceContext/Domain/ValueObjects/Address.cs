@@ -1,12 +1,10 @@
-﻿using Flunt.Notifications;
-using Flunt.Validations;
-using System;
+﻿using Flunt.Validations;
+using ProjetoMvp.Shared.Domain.ValueObjects;
 
-namespace ProjetoMvp.Api.Models
+namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
 {
-    public class Address : Notifiable
+    public class Address : ValueObject
     {
-        public Guid Id { get; private set; }
         public string Street { get; private set; }
         public string City { get; private set; }
         public string State { get; private set; }
@@ -31,7 +29,6 @@ namespace ProjetoMvp.Api.Models
 
             if(Valid)
             {
-                Id = Guid.NewGuid();
                 Country = country;
                 State = state;
                 City = city;

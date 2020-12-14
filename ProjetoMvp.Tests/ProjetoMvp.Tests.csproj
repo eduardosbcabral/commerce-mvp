@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProjetoMvp.Api\ProjetoMvp.Api.csproj" />
+    <ProjectReference Include="..\ProjetoMvp.CommerceContext\ProjetoMvp.CommerceContext.csproj" />
   </ItemGroup>
 
 </Project>

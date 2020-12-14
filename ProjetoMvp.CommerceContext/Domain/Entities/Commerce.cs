@@ -1,11 +1,10 @@
-﻿using System;
-using System.Net.Sockets;
+﻿using ProjetoMvp.CommerceContext.Domain.ValueObjects;
+using ProjetoMvp.Shared.Domain.Entities;
 
-namespace ProjetoMvp.Api.Models
+namespace ProjetoMvp.CommerceContext.Domain.Entities
 {
-    public class Commerce
+    public class Commerce : Entity
     {
-        public Guid Id { get; private set; }
         public string Name { get; private set; }
         public Site Site { get; private set; }
         public Address Address { get; private set; }

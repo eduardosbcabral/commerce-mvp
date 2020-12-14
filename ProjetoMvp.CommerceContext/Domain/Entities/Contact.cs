@@ -1,12 +1,11 @@
-﻿using Flunt.Notifications;
-using Flunt.Validations;
-using System;
+﻿using Flunt.Validations;
+using ProjetoMvp.CommerceContext.Domain.ValueObjects;
+using ProjetoMvp.Shared.Domain.Entities;
 
-namespace ProjetoMvp.Api.Models
+namespace ProjetoMvp.CommerceContext.Domain.Entities
 {
-    public class Contact : Notifiable
+    public class Contact : Entity
     {
-        public Guid Id { get; private set; }
         public Email Email { get; private set; }
         public Phone Phone { get; private set; }
         public Phone WhatsApp { get; private set; }
@@ -24,7 +23,6 @@ namespace ProjetoMvp.Api.Models
 
             if (Valid)
             {
-                Id = Guid.NewGuid();
                 Email = email;
                 Phone = phone;
             }

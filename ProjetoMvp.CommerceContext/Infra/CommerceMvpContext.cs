@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjetoMvp.Api.Models;
+using ProjetoMvp.CommerceContext.Domain.Entities;
+using ProjetoMvp.CommerceContext.Domain.ValueObjects;
 
-namespace ProjetoMvp.Api.Infra
+namespace ProjetoMvp.CommerceContext.Infra
 {
     public class CommerceMvpContext : DbContext
     {
@@ -42,10 +43,6 @@ namespace ProjetoMvp.Api.Infra
 
             modelBuilder.Entity<Site>()
                 .ToTable("TB_SITE")
-                .HasKey(x => x.Id);
-
-            modelBuilder.Entity<Address>()
-                .ToTable("TB_ADDRESS")
                 .HasKey(x => x.Id);
         }
     }

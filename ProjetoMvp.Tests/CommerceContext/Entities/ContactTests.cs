@@ -1,9 +1,10 @@
-﻿using ProjetoMvp.Api.Models;
+﻿using ProjetoMvp.CommerceContext.Domain.Entities;
+using ProjetoMvp.CommerceContext.Domain.ValueObjects;
 using System;
 using System.Linq;
 using Xunit;
 
-namespace ProjetoMvp.Tests.Models
+namespace ProjetoMvp.Tests.CommerceContext.Entities
 {
     public class ContactTests
     {

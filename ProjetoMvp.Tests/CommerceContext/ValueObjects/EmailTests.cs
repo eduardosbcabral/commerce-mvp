@@ -1,8 +1,8 @@
-﻿using ProjetoMvp.Api.Models;
+﻿using ProjetoMvp.CommerceContext.Domain.ValueObjects;
 using System.Linq;
 using Xunit;
 
-namespace ProjetoMvp.Tests.Models
+namespace ProjetoMvp.Tests.CommerceContext.ValueObjects
 {
     public class EmailTests
     {

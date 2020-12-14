@@ -1,9 +1,9 @@
-﻿using Flunt.Notifications;
-using Flunt.Validations;
+﻿using Flunt.Validations;
+using ProjetoMvp.Shared.Domain.ValueObjects;
 
-namespace ProjetoMvp.Api.Models
+namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
 {
-    public class Phone : Notifiable
+    public class Phone : ValueObject
     {
         public string Ddd { get; private set; }
         public string Number { get; private set; }

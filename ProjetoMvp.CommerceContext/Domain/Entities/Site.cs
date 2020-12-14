@@ -1,10 +1,9 @@
-﻿using System;
+﻿using ProjetoMvp.Shared.Domain.Entities;
 
-namespace ProjetoMvp.Api.Models
+namespace ProjetoMvp.CommerceContext.Domain.Entities
 {
-    public class Site
+    public class Site : Entity
     {
-        public Guid Id { get; private set; }
         public string Domain { get; private set; }
         public Commerce Commerce { get; private set; }
         public bool Active { get; private set; }
