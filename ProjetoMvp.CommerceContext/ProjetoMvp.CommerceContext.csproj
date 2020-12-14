@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Domain\Enums\" />
+    <Folder Include="Domain\Handlers\" />
   </ItemGroup>
 
   <ItemGroup>
