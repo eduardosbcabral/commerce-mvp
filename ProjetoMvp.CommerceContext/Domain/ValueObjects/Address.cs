@@ -11,7 +11,7 @@ namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
         public string ZipCode { get; private set; }
         public string Country { get; private set; }
 
-        public Address(string country, string state, string city)
+        public Address(string country, string state, string city, string zipCode, string street)
         {
             AddNotifications(new Contract()
                 .IsNotNull(country, nameof(Country), "País é obrigatório.")
@@ -32,6 +32,8 @@ namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
                 Country = country;
                 State = state;
                 City = city;
+                ZipCode = zipCode;
+                Street = street;
             }
         }
     }
