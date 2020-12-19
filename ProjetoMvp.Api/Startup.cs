@@ -23,7 +23,7 @@ namespace ProjetoMvp.Api
         {
             services.AddControllers();
 
-            services.AddDbContext<CommerceMvpContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Database")));
+            services.AddDbContext<CommerceDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Database")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

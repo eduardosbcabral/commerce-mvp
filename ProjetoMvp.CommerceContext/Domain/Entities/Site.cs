@@ -7,7 +7,6 @@ namespace ProjetoMvp.CommerceContext.Domain.Entities
     {
         public string Domain { get; private set; }
         public Commerce Commerce { get; private set; }
-        public bool Active { get; private set; }
 
         public Site(string domain)
         {
@@ -19,7 +18,6 @@ namespace ProjetoMvp.CommerceContext.Domain.Entities
             if (Valid)
             {
                 Domain = domain;
-                Active = true;
             }
         }
     }

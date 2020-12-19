@@ -31,9 +31,8 @@ namespace ProjetoMvp.Tests.CommerceContext.Entities
         {
             var contact = new Contact(null, _phone);
             Assert.True(contact.Invalid);
-            Assert.Equal("Email", contact.Notifications
-                .Select(x => x.Property)
-                .FirstOrDefault(x => x == "Email"));
+            Assert.Contains("Email", contact.Notifications
+                .Select(x => x.Property));
         }
 
         [Fact]

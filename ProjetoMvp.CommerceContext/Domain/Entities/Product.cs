@@ -9,7 +9,6 @@ namespace ProjetoMvp.CommerceContext.Domain.Entities
         public string Description { get; private set; }
         public decimal Price { get; private set; }
         public List<ProductImage> Images { get; private set; }
-        public bool Active { get; private set; }
 
     }
 }
