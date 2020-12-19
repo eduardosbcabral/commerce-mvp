@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjetoMvp.CommerceContext.Infra;
@@ -9,9 +10,10 @@ using ProjetoMvp.CommerceContext.Infra;
 namespace ProjetoMvp.CommerceContext.Migrations
 {
     [DbContext(typeof(CommerceDbContext))]
-    partial class CommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201219075702_InitialSite")]
+    partial class InitialSite
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

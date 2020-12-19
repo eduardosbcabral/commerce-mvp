@@ -6,7 +6,6 @@ namespace ProjetoMvp.CommerceContext.Domain.Entities
     public class Site : Entity
     {
         public string Domain { get; private set; }
-        public Commerce Commerce { get; private set; }
 
         public Site(string domain)
         {

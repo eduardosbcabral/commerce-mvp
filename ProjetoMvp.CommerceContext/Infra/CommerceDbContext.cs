@@ -26,37 +26,41 @@ namespace ProjetoMvp.CommerceContext.Infra
                 .HasKey(x => x.Id);
 
             modelBuilder.Entity<Commerce>()
-                .Property(x => x.Name);
-
-            modelBuilder.Entity<Commerce>()
-                .Property(x => x.Active);
-
-            modelBuilder.Entity<Commerce>()
-                .OwnsOne(x => x.Address)
-                .Property(x => x.Street)
-                .HasColumnName("Street");
-
-            modelBuilder.Entity<Commerce>()
-                .OwnsOne(x => x.Address)
-                .Property(x => x.City)
-                .HasColumnName("City")
+                .Property(x => x.Name)
                 .IsRequired();
 
             modelBuilder.Entity<Commerce>()
-                .OwnsOne(x => x.Address)
-                .Property(x => x.State)
-                .HasColumnName("State")
+                .Property(x => x.Active)
                 .IsRequired();
 
             modelBuilder.Entity<Commerce>()
-                .OwnsOne(x => x.Address)
-                .Property(x => x.ZipCode)
-                .HasColumnName("ZipCode");
+                .OwnsOne(x => x.Address, a =>
+                {
+                    a.Property(x => x.Street)
+                        .HasColumnName("Street");
+                    a.Property(x => x.City)
+                        .HasColumnName("City")
+                        .IsRequired();
+                    a.Property(x => x.State)
+                        .HasColumnName("State")
+                        .IsRequired();
+                    a.Property(x => x.ZipCode)
+                        .HasColumnName("ZipCode");
+                    a.Property(x => x.Country)
+                        .HasColumnName("Country")
+                        .IsRequired();
+                });
 
-            modelBuilder.Entity<Commerce>()
-                .OwnsOne(x => x.Address)
-                .Property(x => x.Country)
-                .HasColumnName("Country")
+            modelBuilder.Entity<Site>()
+                .ToTable("TB_SITE")
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Site>()
+                .Property(x => x.Domain)
+                .IsRequired();
+
+            modelBuilder.Entity<Site>()
+                .Property(x => x.Active)
                 .IsRequired();
         }
     }
