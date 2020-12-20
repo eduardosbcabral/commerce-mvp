@@ -1,4 +1,7 @@
-﻿using ProjetoMvp.Shared.Domain.Handlers;
+﻿using Flunt.Notifications;
+using ProjetoMvp.Shared.Domain.Commands;
+using ProjetoMvp.Shared.Domain.Handlers;
+using System.Collections.Generic;
 
 namespace ProjetoMvp.CommerceContext.Domain.Commands
 {
@@ -12,7 +15,7 @@ namespace ProjetoMvp.CommerceContext.Domain.Commands
 
         }
 
-        public CommandResult(bool success, string message)
+        public CommandResult(bool success, string message) 
         {
             Success = success;
             Message = message;

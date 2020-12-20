@@ -1,7 +1,6 @@
 ﻿using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
 using ProjetoMvp.CommerceContext.Domain.Entities;
-using ProjetoMvp.Shared.Domain.Entities;
 
 namespace ProjetoMvp.CommerceContext.Infra
 {

@@ -10,7 +10,7 @@ using ProjetoMvp.CommerceContext.Infra;
 namespace ProjetoMvp.CommerceContext.Migrations
 {
     [DbContext(typeof(CommerceDbContext))]
-    [Migration("20201219072445_InitialCommerce")]
+    [Migration("20201220025541_InitialCommerce")]
     partial class InitialCommerce
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,11 +31,30 @@ namespace ProjetoMvp.CommerceContext.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("TB_COMMERCE");
+                });
+
+            modelBuilder.Entity("ProjetoMvp.CommerceContext.Domain.Entities.Site", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Domain")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TB_SITE");
                 });
 
             modelBuilder.Entity("ProjetoMvp.CommerceContext.Domain.Entities.Commerce", b =>

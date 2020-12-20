@@ -49,6 +49,7 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
                 return new CommandResult(false, "Não foi possível cadastrar o comércio.");
 
             _commerceRepository.Save(commerce);
+            _commerceRepository.SaveChanges();
 
             return new CommandResult(true, "Comércio cadastrado com sucesso.");
         }

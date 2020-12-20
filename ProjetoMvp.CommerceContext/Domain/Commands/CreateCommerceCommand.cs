@@ -1,6 +1,7 @@
 ﻿using Flunt.Notifications;
 using Flunt.Validations;
 using ProjetoMvp.Shared.Domain.Commands;
+using System.Collections.Generic;
 
 namespace ProjetoMvp.CommerceContext.Domain.Commands
 {
@@ -14,6 +15,11 @@ namespace ProjetoMvp.CommerceContext.Domain.Commands
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string Country { get; set; }
+
+        public CreateCommerceCommand()
+        {
+
+        }
 
         public void Validate()
         {
