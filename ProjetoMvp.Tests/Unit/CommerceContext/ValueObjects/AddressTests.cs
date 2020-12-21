@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace ProjetoMvp.Tests.CommerceContext.ValueObjects
+namespace ProjetoMvp.Tests.Unit.CommerceContext.ValueObjects
 {
     public class AddressTests
     {

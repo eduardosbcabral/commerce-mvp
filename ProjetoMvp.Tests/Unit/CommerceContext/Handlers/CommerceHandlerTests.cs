@@ -5,7 +5,7 @@ using ProjetoMvp.CommerceContext.Domain.Repositories;
 using System.Linq;
 using Xunit;
 
-namespace ProjetoMvp.Tests.CommerceContext.Handlers
+namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
 {
     public class CommerceHandlerTests
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace ProjetoMvp.Tests.CommerceContext.ApplicationServices
+namespace ProjetoMvp.Tests.Unit.CommerceContext.Commands
 {
     public class CreateCommerceCommandTests
     {

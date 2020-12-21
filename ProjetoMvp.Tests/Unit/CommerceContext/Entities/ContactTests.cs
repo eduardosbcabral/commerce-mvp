@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace ProjetoMvp.Tests.CommerceContext.Entities
+namespace ProjetoMvp.Tests.Unit.CommerceContext.Entities
 {
     public class ContactTests
     {
