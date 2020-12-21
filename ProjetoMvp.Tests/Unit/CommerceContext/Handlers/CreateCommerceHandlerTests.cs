@@ -7,11 +7,11 @@ using Xunit;
 
 namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
 {
-    public class CommerceHandlerTests
+    public class CreateCommerceHandlerTests
     {
         private readonly Mock<ICommerceRepository> _mockCommerceRepository;
 
-        public CommerceHandlerTests()
+        public CreateCommerceHandlerTests()
         {
             _mockCommerceRepository = new Mock<ICommerceRepository>();
         }
@@ -19,7 +19,7 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
         [Fact]
         public void Should_return_success()
         {
-            var handler = new CommerceHandler(_mockCommerceRepository.Object);
+            var handler = new CreateCommerceHandler(_mockCommerceRepository.Object);
 
             var command = new CreateCommerceCommand
             {
@@ -39,7 +39,7 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
         [Fact]
         public void Should_return_error_when_command_is_invalid()
         {
-            var handler = new CommerceHandler(_mockCommerceRepository.Object);
+            var handler = new CreateCommerceHandler(_mockCommerceRepository.Object);
 
             var command = new CreateCommerceCommand();
 
@@ -53,10 +53,10 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
         [Fact]
         public void Should_return_error_when_name_exists()
         {
-            _mockCommerceRepository.Setup(x => x.NameExists(It.IsAny<string>()))
+            _mockCommerceRepository.Setup(x => x.NameExists(It.IsAny<string>(), null))
                 .Returns(true);
 
-            var handler = new CommerceHandler(_mockCommerceRepository.Object);
+            var handler = new CreateCommerceHandler(_mockCommerceRepository.Object);
 
             var command = new CreateCommerceCommand
             {
@@ -79,12 +79,12 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
         [Fact]
         public void Should_return_error_when_domain_exists()
         {
-            _mockCommerceRepository.Setup(x => x.NameExists(It.IsAny<string>()))
+            _mockCommerceRepository.Setup(x => x.NameExists(It.IsAny<string>(), null))
                 .Returns(false);
-            _mockCommerceRepository.Setup(x => x.DomainExists(It.IsAny<string>()))
+            _mockCommerceRepository.Setup(x => x.DomainExists(It.IsAny<string>(), null))
                 .Returns(true);
 
-            var handler = new CommerceHandler(_mockCommerceRepository.Object);
+            var handler = new CreateCommerceHandler(_mockCommerceRepository.Object);
 
             var command = new CreateCommerceCommand
             {

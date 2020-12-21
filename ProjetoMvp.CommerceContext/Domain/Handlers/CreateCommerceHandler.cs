@@ -7,12 +7,13 @@ using ProjetoMvp.Shared.Domain.Handlers;
 
 namespace ProjetoMvp.CommerceContext.Domain.Handlers
 {
-    public class CommerceHandler : Notifiable,
+    public class CreateCommerceHandler : Notifiable,
         IHandler<CreateCommerceCommand>
     {
         private readonly ICommerceRepository _commerceRepository;
 
-        public CommerceHandler(ICommerceRepository commerceRepository)
+        public CreateCommerceHandler(
+            ICommerceRepository commerceRepository)
         {
             _commerceRepository = commerceRepository;
         }
@@ -24,7 +25,7 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
             if (command.Invalid)
             {
                 AddNotifications(command);
-                return new CommandResult(false, "Não foi possível cadastrar o comércio.");
+                return new CommandResult(false, "Não foi possível cadastrar o comércio.", command);
             }
 
             if (_commerceRepository.NameExists(command.Name))
@@ -46,7 +47,7 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
             AddNotifications(address, site, commerce);
 
             if (Invalid)
-                return new CommandResult(false, "Não foi possível cadastrar o comércio.");
+                return new CommandResult(false, "Não foi possível cadastrar o comércio.", this);
 
             _commerceRepository.Save(commerce);
             _commerceRepository.SaveChanges();

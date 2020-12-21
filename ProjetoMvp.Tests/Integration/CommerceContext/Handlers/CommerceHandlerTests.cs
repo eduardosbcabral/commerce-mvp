@@ -10,9 +10,9 @@ using Xunit;
 
 namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
 {
-    public class CommerceHandlerTests : IntegrationTestsBase
+    public class CreateCommerceCommandTests : IntegrationTestsBase
     {
-        public CommerceHandlerTests(CustomWebApplicationFactory<Startup> factory) 
+        public CreateCommerceCommandTests(CustomWebApplicationFactory<Startup> factory) 
             : base(factory)
         {
         }
@@ -62,7 +62,7 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
             });
 
             // Assert
-            Assert.True(result.Success);
+            Assert.True(result.Success, result.Message);
             Assert.Equal("Comércio cadastrado com sucesso.", result.Message);
             response.EnsureSuccessStatusCode();
         }

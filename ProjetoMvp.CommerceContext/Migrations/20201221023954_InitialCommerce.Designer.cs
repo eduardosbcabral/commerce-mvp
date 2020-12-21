@@ -10,7 +10,7 @@ using ProjetoMvp.CommerceContext.Infra;
 namespace ProjetoMvp.CommerceContext.Migrations
 {
     [DbContext(typeof(CommerceDbContext))]
-    [Migration("20201220025541_InitialCommerce")]
+    [Migration("20201221023954_InitialCommerce")]
     partial class InitialCommerce
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,9 @@ namespace ProjetoMvp.CommerceContext.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("SiteId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.ToTable("TB_COMMERCE");
@@ -48,11 +51,17 @@ namespace ProjetoMvp.CommerceContext.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
 
+                    b.Property<Guid?>("CommerceId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Domain")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CommerceId")
+                        .IsUnique();
 
                     b.ToTable("TB_SITE");
                 });
@@ -83,22 +92,34 @@ namespace ProjetoMvp.CommerceContext.Migrations
                                 .HasColumnType("text")
                                 .HasColumnName("Street");
 
-                            b1.Property<int>("TempId1")
-                                .HasColumnType("integer");
-
                             b1.Property<string>("ZipCode")
                                 .HasColumnType("text")
                                 .HasColumnName("ZipCode");
 
                             b1.HasKey("CommerceId");
 
-                            b1.ToTable("TB_COMMERCE");
+                            b1.ToTable("TB_ADDRESS");
 
                             b1.WithOwner()
                                 .HasForeignKey("CommerceId");
                         });
 
                     b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("ProjetoMvp.CommerceContext.Domain.Entities.Site", b =>
+                {
+                    b.HasOne("ProjetoMvp.CommerceContext.Domain.Entities.Commerce", "Commerce")
+                        .WithOne("Site")
+                        .HasForeignKey("ProjetoMvp.CommerceContext.Domain.Entities.Site", "CommerceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Commerce");
+                });
+
+            modelBuilder.Entity("ProjetoMvp.CommerceContext.Domain.Entities.Commerce", b =>
+                {
+                    b.Navigation("Site");
                 });
 #pragma warning restore 612, 618
         }

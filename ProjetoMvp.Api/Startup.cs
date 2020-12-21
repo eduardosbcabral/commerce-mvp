@@ -31,7 +31,7 @@ namespace ProjetoMvp.Api
 
             services.AddDbContext<CommerceDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Database")));
 
-            services.AddScoped<IHandler<CreateCommerceCommand>, CommerceHandler>();
+            services.AddScoped<IHandler<CreateCommerceCommand>, CreateCommerceHandler>();
             services.AddScoped<ICommerceRepository, CommerceRepository>();
 
             services.AddMvc(options =>
@@ -48,7 +48,7 @@ namespace ProjetoMvp.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

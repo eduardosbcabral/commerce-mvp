@@ -1,8 +1,10 @@
 ﻿using Flunt.Validations;
+using Microsoft.EntityFrameworkCore;
 using ProjetoMvp.Shared.Domain.ValueObjects;
 
 namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
 {
+    [Owned]
     public class Address : ValueObject
     {
         public string Street { get; private set; }

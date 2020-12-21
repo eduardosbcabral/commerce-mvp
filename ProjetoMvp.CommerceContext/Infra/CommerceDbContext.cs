@@ -48,7 +48,15 @@ namespace ProjetoMvp.CommerceContext.Infra
                     a.Property(x => x.Country)
                         .HasColumnName("Country")
                         .IsRequired();
+
+                    a.ToTable("TB_ADDRESS");
                 });
+
+            modelBuilder.Entity<Commerce>()
+                .HasOne(x => x.Site)
+                .WithOne(x => x.Commerce)
+                .HasForeignKey<Site>("CommerceId")
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Site>()
                 .ToTable("TB_SITE")
