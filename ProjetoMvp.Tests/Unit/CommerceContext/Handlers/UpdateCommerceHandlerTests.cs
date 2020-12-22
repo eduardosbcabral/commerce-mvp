@@ -3,8 +3,8 @@ using ProjetoMvp.CommerceContext.Domain.Commands;
 using ProjetoMvp.CommerceContext.Domain.Entities;
 using ProjetoMvp.CommerceContext.Domain.Handlers;
 using ProjetoMvp.CommerceContext.Domain.Repositories;
+using ProjetoMvp.CommerceContext.Domain.ValueObjects;
 using System;
-using System.Linq;
 using Xunit;
 
 namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
@@ -23,21 +23,19 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
         [Fact]
         public void Should_return_success()
         {
+            var commerceMock = new Commerce("test", new Site(), new Address());
             _mockCommerceRepository.Setup(x => x.NameExists(It.IsAny<string>(), It.IsAny<Guid>()))
                 .Returns(false);
             _mockCommerceRepository.Setup(x => x.DomainExists(It.IsAny<string>(), It.IsAny<Guid>()))
                 .Returns(false);
-            _mockSiteRepository.Setup(x => x.GetById(It.IsAny<Guid>()))
-                .Returns(new Site());
             _mockCommerceRepository.Setup(x => x.GetById(It.IsAny<Guid>()))
-              .Returns(new Commerce());
+              .Returns(commerceMock);
 
-            var handler = new UpdateCommerceHandler(_mockCommerceRepository.Object, _mockSiteRepository.Object);
+            var handler = new UpdateCommerceHandler(_mockCommerceRepository.Object);
 
             var command = new UpdateCommerceCommand
             {
                 Id = Guid.NewGuid(),
-                SiteId = Guid.NewGuid(),
                 Name = "Test Name",
                 SiteDomain = "test.com",
                 Country = "Brasil",
@@ -54,7 +52,7 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
         [Fact]
         public void Should_return_error_when_command_is_invalid()
         {
-            var handler = new UpdateCommerceHandler(_mockCommerceRepository.Object, _mockSiteRepository.Object);
+            var handler = new UpdateCommerceHandler(_mockCommerceRepository.Object);
 
             var command = new UpdateCommerceCommand();
 
@@ -71,12 +69,11 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
             _mockCommerceRepository.Setup(x => x.NameExists(It.IsAny<string>(), It.IsAny<Guid>()))
                 .Returns(true);
 
-            var handler = new UpdateCommerceHandler(_mockCommerceRepository.Object, _mockSiteRepository.Object);
+            var handler = new UpdateCommerceHandler(_mockCommerceRepository.Object);
 
             var command = new UpdateCommerceCommand
             {
                 Id = Guid.NewGuid(),
-                SiteId = Guid.NewGuid(),
                 Name = "Test Name",
                 SiteDomain = "test.com",
                 Country = "Brasil",
@@ -99,12 +96,11 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
             _mockCommerceRepository.Setup(x => x.DomainExists(It.IsAny<string>(), It.IsAny<Guid>()))
                 .Returns(true);
 
-            var handler = new UpdateCommerceHandler(_mockCommerceRepository.Object, _mockSiteRepository.Object);
+            var handler = new UpdateCommerceHandler(_mockCommerceRepository.Object);
 
             var command = new UpdateCommerceCommand
             {
                 Id = Guid.NewGuid(),
-                SiteId = Guid.NewGuid(),
                 Name = "Test Name",
                 SiteDomain = "test.com",
                 Country = "Brasil",

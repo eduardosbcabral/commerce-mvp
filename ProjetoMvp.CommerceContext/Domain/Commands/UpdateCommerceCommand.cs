@@ -10,7 +10,6 @@ namespace ProjetoMvp.CommerceContext.Domain.Commands
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public Guid SiteId { get; set; }
         public string SiteDomain { get; set; }
 
         public string Street { get; set; }
@@ -34,7 +33,6 @@ namespace ProjetoMvp.CommerceContext.Domain.Commands
                 .HasMinLen(Name, 3, nameof(Name), "Nome deve ter no mínimo 3 caracteres.")
                 .HasMaxLen(Name, 50, nameof(Name), "Nome deve ter no máximo 50 caracteres.")
 
-                .IsNotEmpty(SiteId, nameof(SiteId), "SiteId é obrigatório.")
                 .IsNotNullOrEmpty(SiteDomain, nameof(SiteDomain), "Domínio é obrigatório.")
 
                 .IsNotNullOrEmpty(Country, nameof(Country), "País é obrigatório.")

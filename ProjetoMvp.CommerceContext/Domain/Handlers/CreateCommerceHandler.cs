@@ -4,6 +4,7 @@ using ProjetoMvp.CommerceContext.Domain.Entities;
 using ProjetoMvp.CommerceContext.Domain.Repositories;
 using ProjetoMvp.CommerceContext.Domain.ValueObjects;
 using ProjetoMvp.Shared.Domain.Handlers;
+using System;
 
 namespace ProjetoMvp.CommerceContext.Domain.Handlers
 {
@@ -52,7 +53,18 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
             _commerceRepository.Save(commerce);
             _commerceRepository.SaveChanges();
 
-            return new CommandResult(true, "Comércio cadastrado com sucesso.");
+            return new CommandResult(true, "Comércio cadastrado com sucesso.", 
+                new CreateCommerceResult(commerce.Id));
+        }
+    }
+
+    public class CreateCommerceResult : ICommandResultObject
+    {
+        public Guid Id { get; private set; }
+
+        public CreateCommerceResult(Guid id)
+        {
+            Id = id;
         }
     }
 }

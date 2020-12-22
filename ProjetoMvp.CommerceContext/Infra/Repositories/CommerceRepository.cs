@@ -13,6 +13,13 @@ namespace ProjetoMvp.CommerceContext.Infra.Repositories
         {
         }
 
+        public override Commerce GetById(Guid id)
+        {
+            return DbSet.AsQueryable()
+                .Include(x => x.Site)
+                .SingleOrDefault(x => x.Id == id);
+        }
+
         public bool DomainExists(string siteDomain, Guid? id = null)
         {
             var query = DbSet
@@ -21,7 +28,7 @@ namespace ProjetoMvp.CommerceContext.Infra.Repositories
 
             if (id != null)
             {
-                query.Where(x => x.Id != id);
+                query = query.Where(x => x.Id != id);
             }
 
             return query.Any();
@@ -35,7 +42,7 @@ namespace ProjetoMvp.CommerceContext.Infra.Repositories
 
             if(id != null)
             {
-                query.Where(x => x.Id != id);
+                query = query.Where(x => x.Id != id);
             }
 
             return query.Any();

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using ProjetoMvp.Api;
 using ProjetoMvp.CommerceContext.Domain.Commands;
+using ProjetoMvp.Shared.Domain.Handlers;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -19,25 +21,8 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
 
         [Theory]
         [InlineData("/commerces")]
-        public async Task Get_all_commerce_should_return_success(string url)
-        {
-            // Arrange
-            var client = _factory.CreateClient();
-
-            // Act
-            var response = await client.GetAsync(url);
-
-            // Assert
-            response.EnsureSuccessStatusCode();
-        }
-
-        [Theory]
-        [InlineData("/commerces")]
         public async Task Create_commerce_should_return_success(string url)
         {
-            // Arrange
-            var client = _factory.CreateClient();
-
             var body = new CreateCommerceCommand()
             {
                 Name = "CommerceName",
@@ -47,23 +32,20 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
                 SiteDomain = "testdomain"
             };
 
-            var stringBody = JsonSerializer.Serialize(body);
+            var stringBody = JsonConvert.SerializeObject(body);
 
             var stringContent = new StringContent(stringBody, Encoding.UTF8, "application/json");
 
             // Act
-            var response = await client.PostAsync(url, stringContent);
+            var response = await _client.PostAsync(url, stringContent);
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
-            var result = JsonSerializer.Deserialize<CommandResult>(jsonResponse, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
+            dynamic result = JObject.Parse(jsonResponse);
 
             // Assert
-            Assert.True(result.Success, result.Message);
-            Assert.Equal("Comércio cadastrado com sucesso.", result.Message);
+            Assert.True((bool)result.success, (string)result.message);
+            Assert.Equal("Comércio cadastrado com sucesso.", (string)result.message);
             response.EnsureSuccessStatusCode();
         }
 
@@ -71,9 +53,6 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
         [InlineData("/commerces")]
         public async Task Create_commerce_should_return_bad_request_when_command_is_invalid(string url)
         {
-            // Arrange
-            var client = _factory.CreateClient();
-
             var body = new CreateCommerceCommand()
             {
                 Name = "",
@@ -83,23 +62,20 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
                 SiteDomain = ""
             };
 
-            var stringBody = JsonSerializer.Serialize(body);
+            var stringBody = JsonConvert.SerializeObject(body);
 
             var stringContent = new StringContent(stringBody, Encoding.UTF8, "application/json");
 
             // Act
-            var response = await client.PostAsync(url, stringContent);
+            var response = await _client.PostAsync(url, stringContent);
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
-            var result = JsonSerializer.Deserialize<CommandResult>(jsonResponse, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
+            dynamic result = JObject.Parse(jsonResponse);
 
             // Assert
-            Assert.False(result.Success);
-            Assert.Equal("Não foi possível cadastrar o comércio.", result.Message);
+            Assert.False((bool)result.success, (string)result.message);
+            Assert.Equal("Não foi possível cadastrar o comércio.", (string)result.message);
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
     }

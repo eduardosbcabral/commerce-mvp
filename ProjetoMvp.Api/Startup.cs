@@ -32,7 +32,9 @@ namespace ProjetoMvp.Api
             services.AddDbContext<CommerceDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Database")));
 
             services.AddScoped<IHandler<CreateCommerceCommand>, CreateCommerceHandler>();
+            services.AddScoped<IHandler<UpdateCommerceCommand>, UpdateCommerceHandler>();
             services.AddScoped<ICommerceRepository, CommerceRepository>();
+            services.AddScoped<ISiteRepository, SiteRepository>();
 
             services.AddMvc(options =>
             {

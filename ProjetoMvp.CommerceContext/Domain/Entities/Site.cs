@@ -23,5 +23,15 @@ namespace ProjetoMvp.CommerceContext.Domain.Entities
                 Domain = domain;
             }
         }
+
+        public void Update(string domain)
+        {
+            AddNotifications(new Contract()
+                .Requires()
+                .IsNotNullOrEmpty(domain, nameof(Domain), "O domínio é obrigatório.")
+            );
+
+            Domain = domain;
+        }
     }
 }

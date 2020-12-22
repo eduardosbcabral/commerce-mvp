@@ -4,5 +4,6 @@
     {
         bool Success { get; }
         string Message { get; }
+        object Result { get; }
     }
 }

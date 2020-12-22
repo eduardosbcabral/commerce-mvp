@@ -11,14 +11,10 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
         IHandler<UpdateCommerceCommand>
     {
         private readonly ICommerceRepository _commerceRepository;
-        private readonly ISiteRepository _siteRepository;
 
-        public UpdateCommerceHandler(
-            ICommerceRepository commerceRepository,
-            ISiteRepository siteRepository)
+        public UpdateCommerceHandler(ICommerceRepository commerceRepository)
         {
             _commerceRepository = commerceRepository;
-            _siteRepository = siteRepository;
         }
 
         public ICommandResult Handle(UpdateCommerceCommand command)
@@ -45,19 +41,15 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
 
             var address = new Address(command.Country, command.State, command.City, command.ZipCode, command.Street);
 
-            var site = _siteRepository.GetById(command.SiteId);
-            if (site is null)
-            {
-                AddNotification("Site", "Não foi possível encontrar o site.");
-                return Failure();
-            }
-
             var commerce = _commerceRepository.GetById(command.Id);
-            if(commerce is null)
+            if (commerce is null)
             {
                 AddNotification("Commerce", "Não foi possível encontrar o comércio.");
                 return Failure();
             }
+
+            var site = commerce.Site;
+            site.Update(command.SiteDomain);
 
             commerce.Update(command.Name, site, address);
 
@@ -75,7 +67,7 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
 
         private CommandResult Failure()
         {
-            return new CommandResult(false, "Não foi possível atualizar o comércio.");
+            return new CommandResult(false, "Não foi possível atualizar o comércio.", this);
         }
     }
 }

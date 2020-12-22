@@ -4,7 +4,6 @@ using ProjetoMvp.Shared.Domain.ValueObjects;
 
 namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
 {
-    [Owned]
     public class Address : ValueObject
     {
         public string Street { get; private set; }
@@ -12,6 +11,8 @@ namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
         public string State { get; private set; }
         public string ZipCode { get; private set; }
         public string Country { get; private set; }
+
+        public Address() { }
 
         public Address(string country, string state, string city, string zipCode, string street)
         {

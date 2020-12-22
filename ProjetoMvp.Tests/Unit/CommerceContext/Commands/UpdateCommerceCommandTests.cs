@@ -22,7 +22,6 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Commands
             var command = new UpdateCommerceCommand
             {
                 Id = Guid.NewGuid(),
-                SiteId = Guid.NewGuid(),
                 Name = _valid_name,
                 SiteDomain = _valid_domain,
                 Country = _valid_country,
@@ -111,20 +110,6 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Commands
             Assert.Equal("Name", command.Notifications
                 .Select(x => x.Property)
                 .FirstOrDefault(x => x == "Name"));
-        }
-
-        [Fact]
-        public void Should_be_invalid_when_site_id_is_empty()
-        {
-            var command = new UpdateCommerceCommand
-            {
-                SiteId = Guid.Empty
-            };
-
-            command.Validate();
-
-            Assert.True(command.Invalid);
-            Assert.Contains(command.Notifications, x => x.Property == "Id");
         }
 
         [Fact]
