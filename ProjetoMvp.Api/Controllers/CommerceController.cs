@@ -39,6 +39,7 @@ namespace ProjetoMvp.Api.Controllers
         }
 
         [HttpPost]
+        [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
         public IActionResult Create([FromBody] CreateCommerceCommand command)
         {
             var result = _createCommerce.Handle(command);
@@ -55,7 +56,8 @@ namespace ProjetoMvp.Api.Controllers
             return Created(createdUri, result);
         }
 
-        [HttpPost("{id}")]
+        [HttpPatch("{id}")]
+        [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Update))]
         public IActionResult Update(Guid id, [FromBody] UpdateCommerceCommand command)
         {
             command.Id = id;

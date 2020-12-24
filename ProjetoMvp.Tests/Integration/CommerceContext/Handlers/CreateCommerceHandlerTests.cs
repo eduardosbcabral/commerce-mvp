@@ -39,6 +39,9 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
             // Act
             var response = await _client.PostAsync(url, stringContent);
 
+            // Assert Response
+            response.EnsureSuccessStatusCode();
+
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
             dynamic result = JObject.Parse(jsonResponse);
@@ -46,7 +49,6 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
             // Assert
             Assert.True((bool)result.success, (string)result.message);
             Assert.Equal("Comércio cadastrado com sucesso.", (string)result.message);
-            response.EnsureSuccessStatusCode();
         }
 
         [Theory]

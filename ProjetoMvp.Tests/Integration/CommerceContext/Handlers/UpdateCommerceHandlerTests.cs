@@ -38,6 +38,8 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
 
             var responseCreate = await _client.PostAsync(url, stringContentCreate);
 
+            responseCreate.EnsureSuccessStatusCode();
+
             var jsonResponseCreate = await responseCreate.Content.ReadAsStringAsync();
 
             dynamic resultCreate = JObject.Parse(jsonResponseCreate);
@@ -46,7 +48,6 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
 
             var bodyUpdate = new UpdateCommerceCommand()
             {
-                Id = entityId,
                 Name = "CommerceName123",
                 Country = "test",
                 State = "São Paulo",
@@ -58,7 +59,10 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
 
             var stringContentUpdate = new StringContent(stringBodyUpdate, Encoding.UTF8, "application/json");
 
-            var responseUpdate = await _client.PostAsync($"{url}/{entityId}", stringContentUpdate);
+            var responseUpdate = await _client.PatchAsync($"{url}/{entityId}", stringContentUpdate);
+
+            responseUpdate.EnsureSuccessStatusCode();
+
             var jsonResponseUpdate = await responseUpdate.Content.ReadAsStringAsync();
 
             dynamic resultUpdate = JObject.Parse(jsonResponseUpdate);
@@ -66,7 +70,6 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
             // Assert
             Assert.True((bool)resultUpdate.success, (string)resultUpdate.message);
             Assert.Equal("Comércio atualizado com sucesso.", (string)resultUpdate.message);
-            responseUpdate.EnsureSuccessStatusCode();
         }
 
         //[Theory]
