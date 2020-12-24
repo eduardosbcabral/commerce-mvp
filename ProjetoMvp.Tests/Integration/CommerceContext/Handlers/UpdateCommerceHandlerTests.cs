@@ -111,11 +111,11 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
 
             var body = new UpdateCommerceCommand()
             {
-                Name = "CommerceName123",
+                Name = "CommerceName1238974641",
                 Country = "test",
                 State = "São Paulo",
                 City = "São Paulo",
-                SiteDomain = "testdomain123"
+                SiteDomain = "testdomain8974641"
             };
 
             var stringBody = JsonConvert.SerializeObject(body);

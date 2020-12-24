@@ -5,20 +5,20 @@ namespace ProjetoMvp.Shared.Domain.Handlers
 {
     public class BadRequestCommandResult : CommandResult
     {
-        public BadRequestCommandResult(bool success, string message)
-            : base(success, message)
+        public BadRequestCommandResult(string message)
+            : base(false, message)
         {
             StatusCode = HttpStatusCode.OK;
         }
 
-        public BadRequestCommandResult(bool success, string message, Notifiable notifiable)
-            : base(success, message, notifiable)
+        public BadRequestCommandResult(string message, Notifiable notifiable)
+            : base(false, message, notifiable)
         {
             StatusCode = HttpStatusCode.BadRequest;
         }
 
-        public BadRequestCommandResult(bool success, string message, object resultObject)
-            : base(success, message, resultObject)
+        public BadRequestCommandResult(string message, object resultObject)
+            : base(false, message, resultObject)
         {
             StatusCode = HttpStatusCode.OK;
         }

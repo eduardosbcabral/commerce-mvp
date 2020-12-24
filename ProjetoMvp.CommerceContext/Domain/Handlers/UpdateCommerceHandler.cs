@@ -24,28 +24,31 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
             if (command.Invalid)
             {
                 AddNotifications(command);
-                return new BadRequestCommandResult(false, "Não foi possível atualizar o comércio.", this);
+                return new BadRequestCommandResult("Não foi possível atualizar o comércio.", this);
             }
 
             if (_commerceRepository.NameExists(command.Name, command.Id))
             {
                 AddNotification("Name", "Este nome já está em uso.");
-                return new BadRequestCommandResult(false, "Não foi possível atualizar o comércio.", this);
             }
 
             if (_commerceRepository.DomainExists(command.SiteDomain, command.Id))
             {
                 AddNotification("Domain", "Este domínio já está em uso.");
-                return new BadRequestCommandResult(false, "Não foi possível atualizar o comércio.", this);
             }
 
             var address = new Address(command.Country, command.State, command.City, command.ZipCode, command.Street);
+
+            AddNotifications(address, this);
+
+            if (Invalid)
+                return new BadRequestCommandResult("Não foi possível atualizar o comércio.", this);
 
             var commerce = _commerceRepository.GetById(command.Id);
             if (commerce is null)
             {
                 AddNotification("Commerce", "Não foi possível encontrar o comércio.");
-                return new NotFoundCommandResult(false, "Não foi possível atualizar o comércio.", this);
+                return new NotFoundCommandResult("Não foi possível atualizar o comércio.", this);
             }
 
             var site = commerce.Site;
@@ -57,12 +60,12 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
             AddNotifications(address, site, commerce);
 
             if (Invalid)
-                return new BadRequestCommandResult(false, "Não foi possível atualizar o comércio.", this);
+                return new BadRequestCommandResult("Não foi possível atualizar o comércio.", this);
 
             _commerceRepository.Update(commerce);
             _commerceRepository.SaveChanges();
 
-            return new SuccessCommandResult(true, "Comércio atualizado com sucesso.");
+            return new SuccessCommandResult("Comércio atualizado com sucesso.");
         }
     }
 }

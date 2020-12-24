@@ -22,13 +22,13 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
             if (command.Invalid)
             {
                 AddNotifications(command);
-                return new BadRequestCommandResult(false, "Não foi possível remover o comércio.", this);
+                return new BadRequestCommandResult("Não foi possível remover o comércio.", this);
             }
 
             var commerce = _commerceRepository.GetById(command.Id);
             if(commerce is null)
             {
-                return new NotFoundCommandResult(false, "Não foi possível encontrar o comércio.");
+                return new NotFoundCommandResult("Não foi possível encontrar o comércio.");
             }
 
             commerce.Inactivate();
@@ -36,7 +36,7 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
             _commerceRepository.Update(commerce);
             _commerceRepository.SaveChanges();
 
-            return new SuccessCommandResult(true, "Comércio removido com sucesso.");
+            return new SuccessCommandResult("Comércio removido com sucesso.");
         }
     }
 }

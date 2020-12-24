@@ -5,20 +5,20 @@ namespace ProjetoMvp.Shared.Domain.Handlers
 {
     public class SuccessCommandResult : CommandResult
     {
-        public SuccessCommandResult(bool success, string message)
-            : base(success, message)
+        public SuccessCommandResult(string message)
+            : base(true, message)
         {
             StatusCode = HttpStatusCode.OK;
         }
 
-        public SuccessCommandResult(bool success, string message, Notifiable notifiable)
-            : base(success, message, notifiable)
+        public SuccessCommandResult(string message, Notifiable notifiable)
+            : base(true, message, notifiable)
         {
             StatusCode = HttpStatusCode.OK;
         }
 
-        public SuccessCommandResult(bool success, string message, object resultObject)
-            : base(success, message, resultObject)
+        public SuccessCommandResult(string message, object resultObject)
+            : base(true, message, resultObject)
         {
             StatusCode = HttpStatusCode.OK;
         }

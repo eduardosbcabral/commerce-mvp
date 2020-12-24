@@ -5,20 +5,20 @@ namespace ProjetoMvp.Shared.Domain.Handlers
 {
     public class NotFoundCommandResult : CommandResult
     {
-        public NotFoundCommandResult(bool success, string message)
-            : base(success, message)
+        public NotFoundCommandResult(string message)
+            : base(false, message)
         {
             StatusCode = HttpStatusCode.NotFound;
         }
 
-        public NotFoundCommandResult(bool success, string message, Notifiable notifiable)
-            : base(success, message, notifiable)
+        public NotFoundCommandResult(string message, Notifiable notifiable)
+            : base(false, message, notifiable)
         {
             StatusCode = HttpStatusCode.NotFound;
         }
 
-        public NotFoundCommandResult(bool success, string message, object resultObject)
-            : base(success, message, resultObject)
+        public NotFoundCommandResult(string message, object resultObject)
+            : base(false, message, resultObject)
         {
             StatusCode = HttpStatusCode.NotFound;
         }

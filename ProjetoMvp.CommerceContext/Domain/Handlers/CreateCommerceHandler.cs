@@ -26,7 +26,7 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
             if (command.Invalid)
             {
                 AddNotifications(command);
-                return new BadRequestCommandResult(false, "Não foi possível cadastrar o comércio.", command);
+                return new BadRequestCommandResult("Não foi possível cadastrar o comércio.", command);
             }
 
             if (_commerceRepository.NameExists(command.Name))
@@ -48,12 +48,12 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
             AddNotifications(address, site, commerce);
 
             if (Invalid)
-                return new BadRequestCommandResult(false, "Não foi possível cadastrar o comércio.", this);
+                return new BadRequestCommandResult("Não foi possível cadastrar o comércio.", this);
 
             _commerceRepository.Save(commerce);
             _commerceRepository.SaveChanges();
 
-            return new SuccessCommandResult(true, "Comércio cadastrado com sucesso.", 
+            return new SuccessCommandResult("Comércio cadastrado com sucesso.", 
                 new CreateCommerceResult(commerce.Id));
         }
     }
