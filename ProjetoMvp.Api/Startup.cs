@@ -33,6 +33,7 @@ namespace ProjetoMvp.Api
 
             services.AddScoped<IHandler<CreateCommerceCommand>, CreateCommerceHandler>();
             services.AddScoped<IHandler<UpdateCommerceCommand>, UpdateCommerceHandler>();
+            services.AddScoped<IHandler<DeleteCommerceCommand>, DeleteCommerceHandler>();
             services.AddScoped<ICommerceRepository, CommerceRepository>();
             services.AddScoped<ISiteRepository, SiteRepository>();
 

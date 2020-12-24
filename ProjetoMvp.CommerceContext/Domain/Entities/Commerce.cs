@@ -47,5 +47,15 @@ namespace ProjetoMvp.CommerceContext.Domain.Entities
                 Address = address;
             }
         }
+
+        public void Activate()
+        {
+            Active = true;
+        }
+
+        public void Inactivate()
+        {
+            Active = false;
+        }
     }
 }

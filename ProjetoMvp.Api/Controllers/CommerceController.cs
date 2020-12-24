@@ -13,16 +13,19 @@ namespace ProjetoMvp.Api.Controllers
     {
         private readonly IHandler<CreateCommerceCommand> _createCommerce;
         private readonly IHandler<UpdateCommerceCommand> _updateCommerce;
+        private readonly IHandler<DeleteCommerceCommand> _deleteCommerce;
 
         private readonly ICommerceRepository _commerceRepository;
 
         public CommerceController(
             IHandler<CreateCommerceCommand> createCommerce,
             IHandler<UpdateCommerceCommand> updateCommerce,
+            IHandler<DeleteCommerceCommand> deleteCommerce,
             ICommerceRepository commerceRepository)
         {
             _createCommerce = createCommerce;
             _updateCommerce = updateCommerce;
+            _deleteCommerce = deleteCommerce;
             _commerceRepository = commerceRepository;
         }
 
@@ -64,6 +67,32 @@ namespace ProjetoMvp.Api.Controllers
             command.Id = id;
 
             var result = _updateCommerce.Handle(command);
+
+            if (!result.Success)
+            {
+                if (result.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    return BadRequest(result);
+                }
+
+                if (result.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound(result);
+                }
+            }
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            var command = new DeleteCommerceCommand()
+            {
+                Id = id
+            };
+
+            var result = _deleteCommerce.Handle(command);
 
             if (!result.Success)
             {
