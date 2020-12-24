@@ -85,6 +85,7 @@ namespace ProjetoMvp.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Delete))]
         public IActionResult Delete(Guid id)
         {
             var command = new DeleteCommerceCommand()
