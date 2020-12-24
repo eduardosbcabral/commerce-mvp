@@ -72,40 +72,66 @@ namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
             Assert.Equal("Comércio atualizado com sucesso.", (string)resultUpdate.message);
         }
 
-        //[Theory]
-        //[InlineData("/commerces")]
-        //public async Task Create_commerce_should_return_bad_request_when_command_is_invalid(string url)
-        //{
-        //    // Arrange
-        //    var client = _factory.CreateClient();
+        [Theory]
+        [InlineData("/commerces")]
+        public async Task Update_commerce_should_return_bad_request_when_command_is_invalid(string url)
+        {
+            var entityId = Guid.NewGuid();
 
-        //    var body = new CreateCommerceCommand()
-        //    {
-        //        Name = "",
-        //        Country = "",
-        //        State = "",
-        //        City = "",
-        //        SiteDomain = ""
-        //    };
+            var body = new UpdateCommerceCommand()
+            {
+                Name = "",
+                Country = "test",
+                State = "São Paulo",
+                City = "São Paulo",
+                SiteDomain = "testdomain123"
+            };
 
-        //    //var stringBody = JsonSerializer.Serialize(body);
+            var stringBody = JsonConvert.SerializeObject(body);
 
-        //    //var stringContent = new StringContent(stringBody, Encoding.UTF8, "application/json");
+            var stringContent = new StringContent(stringBody, Encoding.UTF8, "application/json");
 
-        //    //// Act
-        //    //var response = await client.PostAsync(url, stringContent);
+            var response = await _client.PatchAsync($"{url}/{entityId}", stringContent);
 
-        //    //var jsonResponse = await response.Content.ReadAsStringAsync();
+            var jsonResponse = await response.Content.ReadAsStringAsync();
 
-        //    //var result = JsonSerializer.Deserialize<CommandResult>(jsonResponse, new JsonSerializerOptions
-        //    //{
-        //    //    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        //    //});
+            dynamic result = JObject.Parse(jsonResponse);
 
-        //    //// Assert
-        //    //Assert.False(result.Success);
-        //    //Assert.Equal("Não foi possível cadastrar o comércio.", result.Message);
-        //    //Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        //}
+            // Assert
+            Assert.False((bool)result.success);
+            Assert.Equal("Não foi possível atualizar o comércio.", (string)result.message);
+            Assert.Equal(HttpStatusCode.BadRequest, (HttpStatusCode)result.statusCode);
+        }
+
+        [Theory]
+        [InlineData("/commerces")]
+        public async Task Update_commerce_should_return_not_found_when_commerce_is_not_found(string url)
+        {
+            var entityId = Guid.NewGuid();
+
+            var body = new UpdateCommerceCommand()
+            {
+                Name = "CommerceName123",
+                Country = "test",
+                State = "São Paulo",
+                City = "São Paulo",
+                SiteDomain = "testdomain123"
+            };
+
+            var stringBody = JsonConvert.SerializeObject(body);
+
+            var stringContent = new StringContent(stringBody, Encoding.UTF8, "application/json");
+
+            var response = await _client.PatchAsync($"{url}/{entityId}", stringContent);
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            dynamic result = JObject.Parse(jsonResponse);
+
+            // Assert
+            Assert.False((bool)result.success);
+            Assert.Equal("Não foi possível atualizar o comércio.", (string)result.message);
+            Assert.Equal(HttpStatusCode.NotFound, (HttpStatusCode)result.statusCode);
+        }
     }
 }

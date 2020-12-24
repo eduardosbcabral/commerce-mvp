@@ -4,6 +4,7 @@ using ProjetoMvp.CommerceContext.Domain.Handlers;
 using ProjetoMvp.CommerceContext.Domain.Repositories;
 using ProjetoMvp.Shared.Domain.Handlers;
 using System;
+using System.Net;
 
 namespace ProjetoMvp.Api.Controllers
 {
@@ -66,7 +67,15 @@ namespace ProjetoMvp.Api.Controllers
 
             if (!result.Success)
             {
-                return BadRequest(result);
+                if (result.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    return BadRequest(result);
+                }
+
+                if (result.StatusCode == HttpStatusCode.NotFound)
+                {
+                    return NotFound(result);
+                }
             }
 
             return Ok(result);

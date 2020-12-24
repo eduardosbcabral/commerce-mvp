@@ -1,14 +1,16 @@
 ﻿using Flunt.Notifications;
 using System.Collections.Generic;
+using System.Net;
 
 namespace ProjetoMvp.Shared.Domain.Handlers
 {
-    public class CommandResult : ICommandResult
+    public abstract class CommandResult : ICommandResult
     {
         public bool Success { get; set; }
         public string Message { get; set; }
         public IList<Notification> Notifications { get; private set; }
         public object Result { get; private set; }
+        public HttpStatusCode StatusCode { get; protected set; }
 
         public CommandResult()
         {
