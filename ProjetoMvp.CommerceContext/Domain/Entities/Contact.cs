@@ -13,6 +13,8 @@ namespace ProjetoMvp.CommerceContext.Domain.Entities
         public string Twitter { get; private set; }
         public string Instagram { get; private set; }
 
+        protected Contact() { }
+
         public Contact(Email email, Phone phone)
         {
             AddNotifications(new Contract()

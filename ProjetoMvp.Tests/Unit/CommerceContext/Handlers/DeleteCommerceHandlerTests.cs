@@ -3,6 +3,7 @@ using ProjetoMvp.CommerceContext.Domain.Commands;
 using ProjetoMvp.CommerceContext.Domain.Entities;
 using ProjetoMvp.CommerceContext.Domain.Handlers;
 using ProjetoMvp.CommerceContext.Domain.Repositories;
+using ProjetoMvp.CommerceContext.Domain.ValueObjects;
 using System;
 using Xunit;
 
@@ -20,8 +21,9 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
         [Fact]
         public void Should_return_success()
         {
+            var commerceMock = new Mock<Commerce>(string.Empty, new Mock<Site>().Object, new Mock<Address>().Object);
             _commerceRepositoryMock.Setup(x => x.GetById(It.IsAny<Guid>()))
-                .Returns(new Commerce());
+                .Returns(commerceMock.Object);
 
             var command = new DeleteCommerceCommand()
             {

@@ -12,7 +12,7 @@ namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
         public string ZipCode { get; private set; }
         public string Country { get; private set; }
 
-        public Address() { }
+        protected Address() { }
 
         public Address(string country, string state, string city, string zipCode, string street)
         {

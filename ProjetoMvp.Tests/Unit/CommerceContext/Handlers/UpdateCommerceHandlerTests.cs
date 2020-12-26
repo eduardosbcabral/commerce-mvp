@@ -23,13 +23,13 @@ namespace ProjetoMvp.Tests.Unit.CommerceContext.Handlers
         [Fact]
         public void Should_return_success()
         {
-            var commerceMock = new Commerce("test", new Site(), new Address());
+            var commerceMock = new Mock<Commerce>("name", new Mock<Site>().Object, new Mock<Address>().Object);
             _mockCommerceRepository.Setup(x => x.NameExists(It.IsAny<string>(), It.IsAny<Guid>()))
                 .Returns(false);
             _mockCommerceRepository.Setup(x => x.DomainExists(It.IsAny<string>(), It.IsAny<Guid>()))
                 .Returns(false);
             _mockCommerceRepository.Setup(x => x.GetById(It.IsAny<Guid>()))
-              .Returns(commerceMock);
+              .Returns(commerceMock.Object);
 
             var handler = new UpdateCommerceHandler(_mockCommerceRepository.Object);
 

@@ -9,7 +9,7 @@ namespace ProjetoMvp.CommerceContext.Domain.Entities
 
         public Commerce Commerce { get; private set; }
 
-        public Site() { }
+        protected Site() { }
 
         public Site(string domain)
         {

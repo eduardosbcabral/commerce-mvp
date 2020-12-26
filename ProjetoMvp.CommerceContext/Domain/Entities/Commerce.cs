@@ -14,7 +14,7 @@ namespace ProjetoMvp.CommerceContext.Domain.Entities
         public int SiteId { get; private set; }
         public Site Site { get; private set; }
 
-        public Commerce() { }
+        protected Commerce() { }
 
         public Commerce(string name, Site site, Address address)
         {
