@@ -1,5 +1,6 @@
 ﻿using Flunt.Validations;
 using ProjetoMvp.Shared.Domain.ValueObjects;
+using System.Collections.Generic;
 
 namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
 {
@@ -31,6 +32,11 @@ namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
         public bool Verify(string passwordToCompare)
         {
             return BCrypt.Net.BCrypt.Verify(passwordToCompare, Value);
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Value;
         }
     }
 }

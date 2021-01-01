@@ -1,5 +1,6 @@
 ﻿using Flunt.Validations;
 using ProjetoMvp.Shared.Domain.ValueObjects;
+using System.Collections.Generic;
 
 namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
 {
@@ -22,6 +23,12 @@ namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
                 Ddd = ddd;
                 Number = number;
             }
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Ddd;
+            yield return Number;
         }
     }
 }

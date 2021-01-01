@@ -10,8 +10,8 @@ using ProjetoMvp.CommerceContext.Infra;
 namespace ProjetoMvp.CommerceContext.Migrations
 {
     [DbContext(typeof(CommerceDbContext))]
-    [Migration("20201221023954_InitialCommerce")]
-    partial class InitialCommerce
+    [Migration("20210101225215_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,20 @@ namespace ProjetoMvp.CommerceContext.Migrations
                 .UseIdentityByDefaultColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.1");
+
+            modelBuilder.Entity("ProjetoMvp.CommerceContext.Domain.Entities.Account", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TB_ACCOUNT");
+                });
 
             modelBuilder.Entity("ProjetoMvp.CommerceContext.Domain.Entities.Commerce", b =>
                 {
@@ -66,6 +80,71 @@ namespace ProjetoMvp.CommerceContext.Migrations
                     b.ToTable("TB_SITE");
                 });
 
+            modelBuilder.Entity("ProjetoMvp.CommerceContext.Domain.Entities.Account", b =>
+                {
+                    b.OwnsOne("ProjetoMvp.CommerceContext.Domain.ValueObjects.Age", "Age", b1 =>
+                        {
+                            b1.Property<Guid>("AccountId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<int>("Value")
+                                .HasColumnType("integer")
+                                .HasColumnName("Age");
+
+                            b1.HasKey("AccountId");
+
+                            b1.ToTable("TB_ACCOUNT");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AccountId");
+                        });
+
+                    b.OwnsOne("ProjetoMvp.CommerceContext.Domain.ValueObjects.Email", "Email", b1 =>
+                        {
+                            b1.Property<Guid>("AccountId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Address")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("Email");
+
+                            b1.HasKey("AccountId");
+
+                            b1.ToTable("TB_ACCOUNT");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AccountId");
+                        });
+
+                    b.OwnsOne("ProjetoMvp.CommerceContext.Domain.ValueObjects.Password", "Password", b1 =>
+                        {
+                            b1.Property<Guid>("AccountId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("Password");
+
+                            b1.HasKey("AccountId");
+
+                            b1.ToTable("TB_ACCOUNT");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AccountId");
+                        });
+
+                    b.Navigation("Age")
+                        .IsRequired();
+
+                    b.Navigation("Email")
+                        .IsRequired();
+
+                    b.Navigation("Password")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ProjetoMvp.CommerceContext.Domain.Entities.Commerce", b =>
                 {
                     b.OwnsOne("ProjetoMvp.CommerceContext.Domain.ValueObjects.Address", "Address", b1 =>
@@ -91,6 +170,9 @@ namespace ProjetoMvp.CommerceContext.Migrations
                             b1.Property<string>("Street")
                                 .HasColumnType("text")
                                 .HasColumnName("Street");
+
+                            b1.Property<int>("TempId1")
+                                .HasColumnType("integer");
 
                             b1.Property<string>("ZipCode")
                                 .HasColumnType("text")

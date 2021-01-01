@@ -50,15 +50,15 @@ namespace ProjetoMvp.CommerceContext.Domain.Handlers
             return new SuccessCommandResult("Conta cadastrada com sucesso.",
                 new CreateAccountResult(account.Id));
         }
+    }
 
-        public class CreateAccountResult : ICommandResultObject
+    public class CreateAccountResult : ICommandResultObject
+    {
+        public Guid Id { get; private set; }
+
+        public CreateAccountResult(Guid id)
         {
-            public Guid Id { get; private set; }
-
-            public CreateAccountResult(Guid id)
-            {
-                Id = id;
-            }
+            Id = id;
         }
     }
 }

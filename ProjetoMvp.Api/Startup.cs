@@ -29,13 +29,20 @@ namespace ProjetoMvp.Api
         {
             services.AddControllers();
 
-            services.AddDbContext<CommerceDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Database")));
+            services.AddDbContext<CommerceDbContext>(options => {
+                options.UseNpgsql(Configuration.GetConnectionString("Database"));
+                //options.UseSqlServer(Configuration.GetConnectionString("Database"));
+            });
 
             services.AddScoped<IHandler<CreateCommerceCommand>, CreateCommerceHandler>();
             services.AddScoped<IHandler<UpdateCommerceCommand>, UpdateCommerceHandler>();
             services.AddScoped<IHandler<DeleteCommerceCommand>, DeleteCommerceHandler>();
+
+            services.AddScoped<IHandler<CreateAccountCommand>, CreateAccountHandler>();
+
             services.AddScoped<ICommerceRepository, CommerceRepository>();
             services.AddScoped<ISiteRepository, SiteRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
 
             services.AddMvc(options =>
             {

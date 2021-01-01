@@ -1,6 +1,6 @@
 ﻿using Flunt.Validations;
-using Microsoft.EntityFrameworkCore;
 using ProjetoMvp.Shared.Domain.ValueObjects;
+using System.Collections.Generic;
 
 namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
 {
@@ -38,6 +38,15 @@ namespace ProjetoMvp.CommerceContext.Domain.ValueObjects
                 ZipCode = zipCode;
                 Street = street;
             }
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return Street;
+            yield return City;
+            yield return State;
+            yield return Country;
+            yield return ZipCode;
         }
     }
 }
