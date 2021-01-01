@@ -9,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
+namespace ProjetoMvp.Tests.Integration.CommerceContext.Commerces
 {
-    public class DeleteCommerceHandlerTests : IntegrationTestsBase
+    public class DeleteCommerceEndpointsTests : IntegrationTestsBase
     {
-        public DeleteCommerceHandlerTests(CustomWebApplicationFactory<Startup> factory)
+        public DeleteCommerceEndpointsTests(CustomWebApplicationFactory<Startup> factory)
             : base(factory)
         {
         }

@@ -1,20 +1,18 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using ProjetoMvp.Api;
 using ProjetoMvp.CommerceContext.Domain.Commands;
-using ProjetoMvp.Shared.Domain.Handlers;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
+namespace ProjetoMvp.Tests.Integration.CommerceContext.Commerces
 {
-    public class CreateCommerceCommandTests : IntegrationTestsBase
+    public class CreateCommerceEndpointsTests : IntegrationTestsBase
     {
-        public CreateCommerceCommandTests(CustomWebApplicationFactory<Startup> factory) 
+        public CreateCommerceEndpointsTests(CustomWebApplicationFactory<Startup> factory) 
             : base(factory)
         {
         }

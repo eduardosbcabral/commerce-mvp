@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using ProjetoMvp.Api;
 using ProjetoMvp.CommerceContext.Domain.Commands;
-using ProjetoMvp.Shared.Domain.Handlers;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -10,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ProjetoMvp.Tests.Integration.CommerceContext.Handlers
+namespace ProjetoMvp.Tests.Integration.CommerceContext.Commerces
 {
-    public class UpdateCommerceHandlerTests : IntegrationTestsBase
+    public class UpdateCommerceEndpointsTests : IntegrationTestsBase
     {
-        public UpdateCommerceHandlerTests(CustomWebApplicationFactory<Startup> factory) 
+        public UpdateCommerceEndpointsTests(CustomWebApplicationFactory<Startup> factory) 
             : base(factory)
         {
         }
