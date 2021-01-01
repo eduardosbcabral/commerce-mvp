@@ -10,7 +10,7 @@ using ProjetoMvp.CommerceContext.Infra;
 namespace ProjetoMvp.CommerceContext.Migrations
 {
     [DbContext(typeof(CommerceDbContext))]
-    [Migration("20210101225215_Init")]
+    [Migration("20210101232126_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -170,9 +170,6 @@ namespace ProjetoMvp.CommerceContext.Migrations
                             b1.Property<string>("Street")
                                 .HasColumnType("text")
                                 .HasColumnName("Street");
-
-                            b1.Property<int>("TempId1")
-                                .HasColumnType("integer");
 
                             b1.Property<string>("ZipCode")
                                 .HasColumnType("text")

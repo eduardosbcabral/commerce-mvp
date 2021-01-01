@@ -169,9 +169,6 @@ namespace ProjetoMvp.CommerceContext.Migrations
                                 .HasColumnType("text")
                                 .HasColumnName("Street");
 
-                            b1.Property<int>("TempId1")
-                                .HasColumnType("integer");
-
                             b1.Property<string>("ZipCode")
                                 .HasColumnType("text")
                                 .HasColumnName("ZipCode");

@@ -45,13 +45,11 @@ namespace ProjetoMvp.CommerceContext.Migrations
                     City = table.Column<string>(type: "text", nullable: false),
                     State = table.Column<string>(type: "text", nullable: false),
                     ZipCode = table.Column<string>(type: "text", nullable: true),
-                    Country = table.Column<string>(type: "text", nullable: false),
-                    TempId1 = table.Column<int>(type: "integer", nullable: false)
+                    Country = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TB_ADDRESS", x => x.CommerceId);
-                    table.UniqueConstraint("AK_TB_ADDRESS_TempId1", x => x.TempId1);
                     table.ForeignKey(
                         name: "FK_TB_ADDRESS_TB_COMMERCE_CommerceId",
                         column: x => x.CommerceId,

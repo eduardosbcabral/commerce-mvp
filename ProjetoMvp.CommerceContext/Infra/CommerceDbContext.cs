@@ -31,6 +31,7 @@ namespace ProjetoMvp.CommerceContext.Infra
             modelBuilder.Ignore<Age>();
             modelBuilder.Ignore<Email>();
             modelBuilder.Ignore<Password>();
+            modelBuilder.Ignore<Address>();
 
             modelBuilder.ApplyConfiguration(new AccountMap());
             modelBuilder.ApplyConfiguration(new CommerceMap());
